@@ -196,37 +196,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wehoop)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>turnovers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Turnovers forced per game in the NBA - Sheet1.csv"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>turnovers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Turnovers forced per game in the NBA - Sheet1.csv"</span>)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>turnovers2024 <span class="ot">&lt;-</span> turnovers <span class="sc">|&gt;</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Team, <span class="st">"2024"</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>OKC <span class="ot">&lt;-</span> turnovers <span class="sc">|&gt;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    Team <span class="sc">==</span> <span class="st">"Okla City"</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>turnovers2024, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Team,<span class="st">`</span><span class="at">2024</span><span class="st">`</span>), <span class="at">weight=</span> <span class="st">`</span><span class="at">2024</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>OKC, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Team, <span class="st">`</span><span class="at">2024</span><span class="st">`</span>), <span class="at">weight=</span> <span class="st">`</span><span class="at">2024</span><span class="st">`</span>), <span class="at">fill=</span><span class="st">"blue"</span>)  <span class="sc">+</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="st">"Teams"</span>, </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="st">"Turnovers forced per game"</span>, </span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">"Thunder were good against the bad, but elite against the great"</span>, </span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle=</span><span class="st">"The leagues turnovers forced per game were quite impressive with Thunder among the elite in the sport."</span>, </span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">"Source: Sports Reference | By Trey Stevens"</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>OKC <span class="ot">&lt;-</span> turnovers <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    Team <span class="sc">==</span> <span class="st">"Okla City"</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>turnovers2024, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Team,<span class="st">`</span><span class="at">2024</span><span class="st">`</span>), <span class="at">weight=</span> <span class="st">`</span><span class="at">2024</span><span class="st">`</span>), <span class="at">fill=</span><span class="st">"lightgrey"</span>) <span class="sc">+</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data=</span>OKC, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Team, <span class="st">`</span><span class="at">2024</span><span class="st">`</span>), <span class="at">weight=</span> <span class="st">`</span><span class="at">2024</span><span class="st">`</span>), <span class="at">fill=</span><span class="st">"blue"</span>)  <span class="sc">+</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="st">""</span>, </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="st">"Turnovers forced per game"</span>, </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">"Thunder were good against the bad, but elite against the great"</span>, </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle=</span><span class="st">"The leagues turnovers forced per game were quite impressive with Thunder among the elite in the sport."</span>, </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">"Source: Sports Reference | By Trey Stevens"</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), </span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title.position =</span> <span class="st">"plot"</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
@@ -283,23 +283,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="lrwqlrbqiq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lrwqlrbqiq table {
+<div id="uurrjfhylh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uurrjfhylh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lrwqlrbqiq thead, #lrwqlrbqiq tbody, #lrwqlrbqiq tfoot, #lrwqlrbqiq tr, #lrwqlrbqiq td, #lrwqlrbqiq th {
+#uurrjfhylh thead, #uurrjfhylh tbody, #uurrjfhylh tfoot, #uurrjfhylh tr, #uurrjfhylh td, #uurrjfhylh th {
   border-style: none;
 }
 
-#lrwqlrbqiq p {
+#uurrjfhylh p {
   margin: 0;
   padding: 0;
 }
 
-#lrwqlrbqiq .gt_table {
+#uurrjfhylh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -325,12 +325,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#lrwqlrbqiq .gt_caption {
+#uurrjfhylh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lrwqlrbqiq .gt_title {
+#uurrjfhylh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -342,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#lrwqlrbqiq .gt_subtitle {
+#uurrjfhylh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -354,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#lrwqlrbqiq .gt_heading {
+#uurrjfhylh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -366,13 +366,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lrwqlrbqiq .gt_bottom_border {
+#uurrjfhylh .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lrwqlrbqiq .gt_col_headings {
+#uurrjfhylh .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -387,7 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lrwqlrbqiq .gt_col_heading {
+#uurrjfhylh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -407,7 +407,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#lrwqlrbqiq .gt_column_spanner_outer {
+#uurrjfhylh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -419,15 +419,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#lrwqlrbqiq .gt_column_spanner_outer:first-child {
+#uurrjfhylh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lrwqlrbqiq .gt_column_spanner_outer:last-child {
+#uurrjfhylh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lrwqlrbqiq .gt_column_spanner {
+#uurrjfhylh .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -439,11 +439,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#lrwqlrbqiq .gt_spanner_row {
+#uurrjfhylh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lrwqlrbqiq .gt_group_heading {
+#uurrjfhylh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -469,7 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#lrwqlrbqiq .gt_empty_group_heading {
+#uurrjfhylh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -484,15 +484,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#lrwqlrbqiq .gt_from_md > :first-child {
+#uurrjfhylh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lrwqlrbqiq .gt_from_md > :last-child {
+#uurrjfhylh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lrwqlrbqiq .gt_row {
+#uurrjfhylh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -511,7 +511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#lrwqlrbqiq .gt_stub {
+#uurrjfhylh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -524,7 +524,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lrwqlrbqiq .gt_stub_row_group {
+#uurrjfhylh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -538,15 +538,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#lrwqlrbqiq .gt_row_group_first td {
+#uurrjfhylh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lrwqlrbqiq .gt_row_group_first th {
+#uurrjfhylh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lrwqlrbqiq .gt_summary_row {
+#uurrjfhylh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -556,16 +556,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lrwqlrbqiq .gt_first_summary_row {
+#uurrjfhylh .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-#lrwqlrbqiq .gt_first_summary_row.thick {
+#uurrjfhylh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lrwqlrbqiq .gt_last_summary_row {
+#uurrjfhylh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -575,7 +575,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lrwqlrbqiq .gt_grand_summary_row {
+#uurrjfhylh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -585,7 +585,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lrwqlrbqiq .gt_first_grand_summary_row {
+#uurrjfhylh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -595,7 +595,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#lrwqlrbqiq .gt_last_grand_summary_row_top {
+#uurrjfhylh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -605,11 +605,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lrwqlrbqiq .gt_striped {
+#uurrjfhylh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lrwqlrbqiq .gt_table_body {
+#uurrjfhylh .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -618,7 +618,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lrwqlrbqiq .gt_footnotes {
+#uurrjfhylh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -632,7 +632,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lrwqlrbqiq .gt_footnote {
+#uurrjfhylh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -641,7 +641,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lrwqlrbqiq .gt_sourcenotes {
+#uurrjfhylh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -655,7 +655,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lrwqlrbqiq .gt_sourcenote {
+#uurrjfhylh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -663,72 +663,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lrwqlrbqiq .gt_left {
+#uurrjfhylh .gt_left {
   text-align: left;
 }
 
-#lrwqlrbqiq .gt_center {
+#uurrjfhylh .gt_center {
   text-align: center;
 }
 
-#lrwqlrbqiq .gt_right {
+#uurrjfhylh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lrwqlrbqiq .gt_font_normal {
+#uurrjfhylh .gt_font_normal {
   font-weight: normal;
 }
 
-#lrwqlrbqiq .gt_font_bold {
+#uurrjfhylh .gt_font_bold {
   font-weight: bold;
 }
 
-#lrwqlrbqiq .gt_font_italic {
+#uurrjfhylh .gt_font_italic {
   font-style: italic;
 }
 
-#lrwqlrbqiq .gt_super {
+#uurrjfhylh .gt_super {
   font-size: 65%;
 }
 
-#lrwqlrbqiq .gt_footnote_marks {
+#uurrjfhylh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lrwqlrbqiq .gt_asterisk {
+#uurrjfhylh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lrwqlrbqiq .gt_indent_1 {
+#uurrjfhylh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lrwqlrbqiq .gt_indent_2 {
+#uurrjfhylh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lrwqlrbqiq .gt_indent_3 {
+#uurrjfhylh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lrwqlrbqiq .gt_indent_4 {
+#uurrjfhylh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lrwqlrbqiq .gt_indent_5 {
+#uurrjfhylh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lrwqlrbqiq .katex-display {
+#uurrjfhylh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lrwqlrbqiq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#uurrjfhylh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
