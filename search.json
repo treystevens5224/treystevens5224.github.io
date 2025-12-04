@@ -18,6 +18,6 @@
     "href": "posts/who-is-the-best-defensive-team-in-the-NFL/index.html",
     "title": "Making my case for why the Seattle Seahawks are one of the most elite defenses in the NFL",
     "section": "",
-    "text": "Code\nlibrary(tidyverse)\nlibrary(gt)\nlibrary(wehoop)\nlibrary(ggrepel)\nlibrary(waffle)\n\nhawks &lt;- read_csv(\"NFL SACKS PER GAME - Sheet1.csv\")"
+    "text": "hvjhgjhgjhgjhg\n\n\nCode\nlibrary(tidyverse)\nlibrary(ggalt)\nlibrary(ggtext)\n\nhawks &lt;- read_csv(\"NFL SACKS PER GAME - Sheet1.csv\")\n\n\nggplot() + \n  geom_dumbbell(\n    data= hawks, \n    aes(y= reorder(Team, Away), x= Home, xend= Away),\n  size = 2, \n  colour = \"grey\",\n  colour_x = \"green\",\n  colour_xend =\"red\") +\n  labs(\n    x=\"Average Sacks per Game\",\n    y=\"\",\n    title=\"How Do the Seahawks Sack Production Rank Among the NFL's Best Defenses?\",\n    subtitle= \"&lt;span style = 'color:green;'&gt;Green&lt;/span&gt; represents sacks at home. &lt;span style = 'color:red;'&gt;Red&lt;/span&gt; represents sacks on the road.\",\n    caption=\"Source: Sports Reference | By Trey Stevens\"\n  ) +\n  theme_minimal() +\n  theme(\n    plot.subtitle = element_textbox_simple(size=10),\n    plot.title = element_text(size = 13, face = \"bold\"),\n    panel.grid.minor = element_blank(),\n    plot.title.position = \"plot\"\n  )\n\n\n\n\n\n\n\n\n\nm,,jhkjhjkh"
   }
 ]
