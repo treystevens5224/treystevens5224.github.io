@@ -16,8 +16,8 @@
   {
     "objectID": "posts/who-is-the-best-defensive-team-in-the-NFL/index.html",
     "href": "posts/who-is-the-best-defensive-team-in-the-NFL/index.html",
-    "title": "The 2024-2025 Thunder Built a Resume Worthy of the Greatest Defensive Team Ever",
+    "title": "Making my case for why the Seattle Seahawks are one of the most elite defenses in the NFL",
     "section": "",
-    "text": "hshhshs"
+    "text": "Code\nlibrary(tidyverse)\nlibrary(gt)\nlibrary(wehoop)\nlibrary(ggrepel)\nlibrary(waffle)\n\nhawks &lt;- read_csv(\"NFL SACKS PER GAME - Sheet1.csv\")"
   }
 ]
